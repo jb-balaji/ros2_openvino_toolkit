@@ -25,6 +25,13 @@ add_library(${PROJECT_NAME} SHARED
   src/param_manager.cpp
 )
 
+if("$ENV{ROS_DISTRO}" STRLESS "jazzy")
+    add_compile_definitions(PRE_ROS_JAZZY)
+else()
+    find_package(yaml-cpp REQUIRED)
+    target_link_libraries(${PROJECT_NAME} yaml-cpp::yaml-cpp)
+endif()
+
 ament_target_dependencies(${PROJECT_NAME}
   "yaml_cpp_vendor"
 )
