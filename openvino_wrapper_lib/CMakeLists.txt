@@ -68,6 +68,12 @@ find_package(cv_bridge REQUIRED)
 find_package(openvino_param_lib REQUIRED)
 find_package(yaml_cpp_vendor REQUIRED)
 
+if("$ENV{ROS_DISTRO}" STRLESS "jazzy")
+    add_compile_definitions(PRE_ROS_JAZZY)
+else()
+    find_package(yaml-cpp REQUIRED)
+endif()
+
 if("${CMAKE_BUILD_TYPE}" STREQUAL "")
     message(STATUS "CMAKE_BUILD_TYPE not defined, 'Release' will be used")
     set(CMAKE_BUILD_TYPE "Release")
@@ -169,7 +175,11 @@ if(UNIX)
     set(LIB_DL dl)
 endif()
 
-set(DEPENDENCIES ${realsense2_LIBRARY} ${OpenCV_LIBS} openvino::runtime)
+if("$ENV{ROS_DISTRO}" STRLESS "jazzy")
+    set(DEPENDENCIES ${realsense2_LIBRARY} ${OpenCV_LIBS} openvino::runtime)
+else()
+    set(DEPENDENCIES ${realsense2_LIBRARY} ${OpenCV_LIBS} openvino::runtime yaml-cpp::yaml-cpp)
+endif()
 
 add_library(${PROJECT_NAME} SHARED
         src/services/pipeline_processing_server.cpp

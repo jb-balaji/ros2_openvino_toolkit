@@ -17,7 +17,11 @@
  * @file image_topic.cpp
  */
 
+#ifdef PRE_ROS_JAZZY
 #include <cv_bridge/cv_bridge.h>
+#else
+#include <cv_bridge/cv_bridge.hpp>
+#endif
 #include <memory>
 #include "openvino_wrapper_lib/inputs/image_topic.hpp"
 #include "openvino_wrapper_lib/slog.hpp"
