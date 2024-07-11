@@ -25,7 +25,8 @@ add_library(${PROJECT_NAME} SHARED
   src/param_manager.cpp
 )
 
-if("$ENV{ROS_DISTRO}" STRLESS "jazzy")
+message(STATUS "ROS_DISTRO: $ENV{ROS_DISTRO}")
+if("${ROS_DISTRO}" STRLESS "jazzy")
     add_compile_definitions(PRE_ROS_JAZZY)
 else()
     find_package(yaml-cpp REQUIRED)

@@ -39,6 +39,10 @@ find_package(OpenVINO REQUIRED)
 if(NOT OpenVINO_FOUND)
     message(FATAL_ERROR "")
 endif()
+if(OpenVINO_VERSION_MAJOR LESS 2024)
+    message(STATUS "The Inference Engine API is deprecate from openvino 2024.x")
+    add_compile_definitions(INFERENCE_ENGINE_API)
+endif()
 set(OpenVINO_LIBRARIES openvino::runtime)
 
 # Find OpenCV library if exists

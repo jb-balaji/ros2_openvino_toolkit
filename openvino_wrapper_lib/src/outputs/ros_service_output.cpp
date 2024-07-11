@@ -24,7 +24,7 @@
 #ifdef PRE_ROS_JAZZY
 #include <cv_bridge/cv_bridge.h>
 #else
-#include <cv_bridge/cv_bridge.hpp>
+#include <cv_bridge/cv_bridge.h>
 #endif
 
 void Outputs::RosServiceOutput::setServiceResponse(std::shared_ptr<object_msgs::srv::DetectObject::Response> response)

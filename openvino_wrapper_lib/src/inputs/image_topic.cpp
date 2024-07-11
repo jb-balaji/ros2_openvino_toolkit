@@ -20,7 +20,7 @@
 #ifdef PRE_ROS_JAZZY
 #include <cv_bridge/cv_bridge.h>
 #else
-#include <cv_bridge/cv_bridge.hpp>
+#include <cv_bridge/cv_bridge.h>
 #endif
 #include <memory>
 #include "openvino_wrapper_lib/inputs/image_topic.hpp"

@@ -1,6 +1,6 @@
 # ROS 2 OpenVINO Toolkit Environment (master f1b1ca4d914186a1881b87f103be9c6e910c9d80)
 
-FROM osrf/ros:jazzy-desktop
+FROM osrf/ros:jazzy-desktop-full
 
 # Set non-interactive mode for APT
 ENV DEBIAN_FRONTEND=noninteractive
@@ -49,4 +49,6 @@ RUN git clone -b ros2_jazzy_patched https://github.com/jb-balaji/ros2_openvino_t
 RUN git clone -b humble https://github.com/ros-perception/vision_opencv.git
 WORKDIR /root/ros2_ws
 RUN source /opt/ros/jazzy/setup.bash \
-    && colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
+#    && colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release
+    && colcon build --cmake-args -DPRE_ROS_JAZZY=1 --cmake-args -DCMAKE_BUILD_TYPE=Release
+

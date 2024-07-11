@@ -24,7 +24,7 @@
 #ifdef PRE_ROS_JAZZY
 #include <cv_bridge/cv_bridge.h>
 #else
-#include <cv_bridge/cv_bridge.hpp>
+#include <cv_bridge/cv_bridge.h>
 #endif
 #include "openvino_wrapper_lib/pipeline.hpp"
 #include "openvino_wrapper_lib/outputs/rviz_output.hpp"

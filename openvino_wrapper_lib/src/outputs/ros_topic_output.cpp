@@ -26,7 +26,7 @@
 #ifdef PRE_ROS_JAZZY
 #include <cv_bridge/cv_bridge.h>
 #else
-#include <cv_bridge/cv_bridge.hpp>
+#include <cv_bridge/cv_bridge.h>
 #endif
 
 Outputs::RosTopicOutput::RosTopicOutput(std::string output_name, const rclcpp::Node::SharedPtr node)
