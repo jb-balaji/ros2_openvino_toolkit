@@ -1,57 +1,50 @@
-# ros2 openvino toolkit env master f1b1ca4d914186a1881b87f103be9c6e910c9d80
+# ROS 2 OpenVINO Toolkit Environment (master f1b1ca4d914186a1881b87f103be9c6e910c9d80)
 
-from osrf/ros:jazzy-desktop-full
+FROM osrf/ros:jazzy-desktop
 
 # Set non-interactive mode for APT
 ENV DEBIAN_FRONTEND=noninteractive
 
 # setting proxy env --option 
 # If needed, enable the below ENV setting by correct proxies.
-ENV http_proxy=http://proxy.png.intel.com:911
-ENV https_proxy=http://proxy.png.intel.com:912
+# ENV http_proxy=your_proxy
+# ENV https_proxy=your_proxy
 
-# maintainer information
+# Maintainer information
 LABEL maintainer="Jayabalaji Sathiyamoorthi <jayabalaji.sathiyamoorthi@intel.com>"
 
 SHELL ["/bin/bash", "-c"]
 
-# install openvino 2025.0.0
-# https://docs.openvinotoolkit.org/latest/openvino_docs_install_guides_installing_openvino_apt.html
-RUN apt update && apt install -y curl wget gnupg2 lsb-release
-RUN wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB && apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB 
-RUN echo "deb https://apt.repos.intel.com/openvino/2025 ubuntu22 main" | tee /etc/apt/sources.list.d/intel-openvino-2025.list   
+# Install dependencies, OpenVINO, and librealsense2
+RUN apt update && \
+    apt install -y --no-install-recommends \
+    curl wget gnupg2 lsb-release nano software-properties-common \
+    apt-transport-https libyaml-cpp-dev ros-jazzy-libyaml-vendor \
+    libssl-dev libusb-1.0-0-dev libudev-dev pkg-config \
+    libgtk-3-dev git cmake build-essential nano && \
+    # Add OpenVINO GPG key and repository
+    wget -qO- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor -o /etc/apt/trusted.gpg.d/intel.gpg && \
+    echo "deb https://apt.repos.intel.com/openvino/2025 ubuntu22 main" | tee /etc/apt/sources.list.d/intel-openvino-2025.list && \
+    apt update && \
+    apt-get install -y openvino-2025.0.0 && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN apt update \
-    && apt-cache search openvino \ 
-    && apt-get install -y openvino-2025.0.0
-#    && apt-get install -y openvino-2024.2.0
-#    && apt-get install -y openvino-2023.3.0 
-
-# install librealsense2
-# Reference : https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md
-RUN apt-get install -y --no-install-recommends \
-    software-properties-common \
-    apt-transport-https \
-    libyaml-cpp-dev \
-    ros-jazzy-libyaml-vendor 
-
-RUN apt-get install -y libssl-dev libusb-1.0-0-dev libudev-dev pkg-config libgtk-3-dev
-RUN apt-get install -y git wget cmake build-essential
-
-#build librealsense2
+# Build librealsense2
 WORKDIR /root/
-RUN git clone --branch v2.55.1 --single-branch https://github.com/IntelRealSense/librealsense.git
-WORKDIR /root/librealsense
-RUN mkdir build 
-WORKDIR /root/librealsense/build 
-RUN cmake ../
-RUN make uninstall && make clean && make -j7 && make install
+RUN git clone --branch v2.55.1 --single-branch https://github.com/IntelRealSense/librealsense.git && \
+    cd librealsense && \
+    mkdir build && \
+    cd build && \
+    cmake ../ && \
+    make uninstall && make clean && make -j7 && make install && \
+    rm -rf /root/librealsense
 
 # build ros2 openvino toolkit
 WORKDIR /root
 RUN mkdir -p ros2_ws/src
 WORKDIR /root/ros2_ws/src
 RUN git clone https://github.com/intel/ros2_object_msgs.git
+#change the branch before merge
 RUN git clone -b ros2_jazzy https://github.com/jb-balaji/ros2_openvino_toolkit.git
 RUN git clone -b humble https://github.com/ros-perception/vision_opencv.git
 WORKDIR /root/ros2_ws
