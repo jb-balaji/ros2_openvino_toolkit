@@ -24,7 +24,7 @@ RUN apt update && \
     libgtk-3-dev git cmake build-essential nano && \
     # Add OpenVINO GPG key and repository
     wget -qO- https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB | gpg --dearmor -o /etc/apt/trusted.gpg.d/intel.gpg && \
-    echo "deb https://apt.repos.intel.com/openvino/2025 ubuntu22 main" | tee /etc/apt/sources.list.d/intel-openvino-2025.list && \
+    echo "deb https://apt.repos.intel.com/openvino/2025 ubuntu24 main" | tee /etc/apt/sources.list.d/intel-openvino-2025.list && \
     apt update && \
     apt-get install -y openvino-2025.0.0 && \
     rm -rf /var/lib/apt/lists/*
