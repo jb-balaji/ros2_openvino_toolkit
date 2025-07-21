@@ -35,7 +35,6 @@ def generate_launch_description():
         launch_ros.actions.Node(
             package='openvino_node',
             executable='pipeline_with_params',
-            #namespace="<namespace>",
             arguments=['-config', LaunchConfiguration('yaml_path')],
             remappings=[
                 ('openvino_toolkit/people/faces',
