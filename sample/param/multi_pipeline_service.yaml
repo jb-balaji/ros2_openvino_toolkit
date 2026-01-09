@@ -40,5 +40,5 @@ Pipelines:
       right: [RosTopic]
     - left: ObjectDetection
       right: [RViz]
-      
+
 OpenvinoCommon:

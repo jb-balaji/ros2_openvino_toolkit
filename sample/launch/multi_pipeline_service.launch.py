@@ -44,16 +44,16 @@ import launch_helpers
 
 def generate_launch_description():
     """Generate launch description for multi-pipeline service with RViz2."""
-    
+
     # Get package share directory
     package_share_dir = get_package_share_directory('openvino_node')
-    
+
     # Resolve YAML configuration paths
     resolved_yaml = launch_helpers.resolve_yaml_paths('multi_pipeline_service.yaml')
-    
+
     # RViz configuration for dual pipeline visualization
     dual_rviz = os.path.join(package_share_dir, 'launch', 'rviz', 'default2.rviz')
-    
+
     return LaunchDescription([
         # Declare launch argument for YAML configuration
         DeclareLaunchArgument(
@@ -61,7 +61,7 @@ def generate_launch_description():
             default_value=resolved_yaml,
             description='Path to YAML configuration file for multi-pipeline service'
         ),
-        
+
         # OpenVINO multi-pipeline node
         Node(
             package='openvino_node',
@@ -80,7 +80,7 @@ def generate_launch_description():
             ],
             output='screen'
         ),
-        
+
         # RViz2 visualization with dual-view config
         Node(
             package='rviz2',

@@ -1,4 +1,4 @@
-Pipelines: 
+Pipelines:
 - name: people
   inputs: [Image]
   input_path: <OPENVINO_DATA>/images/sample_faces.jpg

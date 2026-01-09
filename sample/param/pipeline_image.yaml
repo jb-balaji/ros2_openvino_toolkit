@@ -1,7 +1,7 @@
-Pipelines: 
+Pipelines:
 - name: people
   inputs: [Image]
-  input_path: <OPENVINO_DATA>/images/sample_faces.jpg 
+  input_path: <OPENVINO_DATA>/images/sample_faces.jpg
   infers:
     - name: FaceDetection
       model: <OPENVINO_NODE_SHARE>/models/intel/face-detection-adas-0001/FP16/face-detection-adas-0001.xml

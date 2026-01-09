@@ -34,10 +34,10 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     """Generate launch description for standalone RViz2."""
-    
+
     # Get package share directory
     package_share_dir = get_package_share_directory('openvino_node')
-    
+
     # Default RViz configuration
     default_rviz_config = os.path.join(
         package_share_dir,
@@ -45,7 +45,7 @@ def generate_launch_description():
         'rviz',
         'default.rviz'
     )
-    
+
     return LaunchDescription([
         # Declare launch argument for custom RViz config
         DeclareLaunchArgument(
@@ -53,7 +53,7 @@ def generate_launch_description():
             default_value=default_rviz_config,
             description='Path to RViz2 configuration file'
         ),
-        
+
         # RViz2 node
         Node(
             package='rviz2',

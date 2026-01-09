@@ -1,7 +1,7 @@
 Pipelines:
 - name: people
   inputs: [StandardCamera]
-  infers: 
+  infers:
     - name: FaceDetection
       model: <OPENVINO_NODE_SHARE>/models/intel/face-detection-adas-0001/FP16/face-detection-adas-0001.xml
       engine: NPU #CPU #GPU

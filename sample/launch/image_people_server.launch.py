@@ -42,10 +42,10 @@ import launch_helpers
 
 def generate_launch_description():
     """Generate launch description for image people analytics service."""
-    
+
     # Resolve YAML configuration paths
     resolved_yaml = launch_helpers.resolve_yaml_paths('image_people_server.yaml')
-    
+
     return LaunchDescription([
         # Declare launch argument for YAML configuration
         DeclareLaunchArgument(
@@ -53,7 +53,7 @@ def generate_launch_description():
             default_value=resolved_yaml,
             description='Path to YAML configuration file for the OpenVINO service'
         ),
-        
+
         # OpenVINO image people analytics service node
         Node(
             package='openvino_node',

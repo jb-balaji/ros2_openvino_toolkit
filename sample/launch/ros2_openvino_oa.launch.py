@@ -48,10 +48,10 @@ import launch_helpers
 
 def generate_launch_description():
     """Generate launch description for OpenVINO Object Analytics."""
-    
+
     # Resolve YAML configuration paths
     resolved_yaml = launch_helpers.resolve_yaml_paths('pipeline_object_topic.yaml')
-    
+
     return LaunchDescription([
         # Declare launch argument for YAML configuration
         DeclareLaunchArgument(
@@ -59,7 +59,7 @@ def generate_launch_description():
             default_value=resolved_yaml,
             description='Path to YAML configuration file for the OpenVINO OA pipeline'
         ),
-        
+
         # OpenVINO object detection node (for Object Analytics)
         Node(
             package='openvino_node',

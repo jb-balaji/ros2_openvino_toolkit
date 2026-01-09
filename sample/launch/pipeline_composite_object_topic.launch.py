@@ -53,7 +53,7 @@ import launch_helpers
 
 def generate_launch_description():
     """Generate launch description for composable object detection pipeline."""
-    
+
     # Get package share directory
     try:
         realsense_config_dir = get_package_share_directory('realsense_examples')
@@ -61,10 +61,10 @@ def generate_launch_description():
     except:
         # Fallback if realsense_examples not installed
         realsense_config = ''
-    
+
     # Resolve YAML configuration paths
     resolved_yaml = launch_helpers.resolve_yaml_paths('pipeline_composite_object_topic.yaml')
-    
+
     return LaunchDescription([
         # Declare launch argument for YAML configuration
         DeclareLaunchArgument(
@@ -72,7 +72,7 @@ def generate_launch_description():
             default_value=resolved_yaml,
             description='Path to YAML configuration file for the composable pipeline'
         ),
-        
+
         # Composable node container with OpenVINO pipeline
         # Note: RealSense node is commented out - uncomment if using RealSense camera
         ComposableNodeContainer(
@@ -89,7 +89,7 @@ def generate_launch_description():
                 #     parameters=[realsense_config] if realsense_config else [],
                 #     extra_arguments=[{'use_intra_process_comms': True}]
                 # ),
-                
+
                 # OpenVINO composable pipeline node
                 ComposableNode(
                     package='openvino_node',

@@ -5,3 +5,6 @@ microsoft.gpg
 /install
 /log
 /build
+__pycache__/
+*.pyc
+*.pyo

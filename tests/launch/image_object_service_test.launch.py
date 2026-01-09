@@ -29,11 +29,11 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     """Generate launch description for image object service test."""
-    
+
     # Get test package share directory
     test_package_dir = get_package_share_directory('openvino_test')
     default_yaml = os.path.join(test_package_dir, 'param', 'image_object_service_test.yaml')
-    
+
     return LaunchDescription([
         # Declare launch argument for YAML configuration
         DeclareLaunchArgument(
@@ -41,7 +41,7 @@ def generate_launch_description():
             default_value=default_yaml,
             description='Path to test YAML configuration file'
         ),
-        
+
         # OpenVINO image object service test node
         Node(
             package='openvino_node',

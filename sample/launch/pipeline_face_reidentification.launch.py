@@ -51,16 +51,16 @@ import launch_helpers
 
 def generate_launch_description():
     """Generate launch description for face re-identification with RViz2."""
-    
+
     # Get package share directory
     package_share_dir = get_package_share_directory('openvino_node')
-    
+
     # Resolve YAML configuration paths
     resolved_yaml = launch_helpers.resolve_yaml_paths('pipeline_face_reidentification.yaml')
-    
+
     # RViz configuration file
     default_rviz = os.path.join(package_share_dir, 'launch', 'rviz', 'people.rviz')
-    
+
     return LaunchDescription([
         # Declare launch argument for YAML configuration
         DeclareLaunchArgument(
@@ -68,29 +68,29 @@ def generate_launch_description():
             default_value=resolved_yaml,
             description='Path to YAML configuration file for the face re-identification pipeline'
         ),
-        
-        
+
+
         # Declare visualization viewer selection
         DeclareLaunchArgument(
             name='viewer',
             default_value='rqt',
             description='Visualization viewer: "rviz2", "rqt", or "none"'
         ),
-        
+
         # Declare RViz config path
         DeclareLaunchArgument(
             name='rviz_config',
             default_value=default_rviz,
             description='Path to RViz configuration file'
         ),
-        
+
         # Declare image topic for rqt
         DeclareLaunchArgument(
             name='image_topic',
             default_value='/ros2_openvino_toolkit/image_rviz',
             description='Image topic for rqt_image_view'
         ),
-        
+
         # Declare viewer startup delay
         DeclareLaunchArgument(
             name='viewer_delay',
@@ -112,7 +112,7 @@ def generate_launch_description():
                  '/ros2_openvino_toolkit/image_rviz'),
             ],
             output='screen'
-        ),        
+        ),
         # RViz2 visualization (conditional)
         TimerAction(
             period=LaunchConfiguration('viewer_delay'),
@@ -129,7 +129,7 @@ def generate_launch_description():
                 )
             ]
         ),
-        
+
         # rqt_image_view (conditional)
         TimerAction(
             period=LaunchConfiguration('viewer_delay'),
