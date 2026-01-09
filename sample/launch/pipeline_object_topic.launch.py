@@ -100,12 +100,6 @@ def generate_launch_description():
             default_value='2.0',
             description='Delay before launching viewer (seconds)'
         ),
-        # Declare launch argument for RViz configuration
-        DeclareLaunchArgument(
-            name='rviz_config',
-            default_value=default_rviz,
-            description='Path to RViz configuration file'
-        ),
 
         # OpenVINO object detection node
         Node(
