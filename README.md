@@ -26,11 +26,12 @@
 
 |Branch Name|ROS2 Version Supported|OpenVINO Version|OS Version|
 |-----------------------|-----------------------|--------------------------------|----------------------|
+|[main](https://github.com/intel/ros2_openvino_toolkit/tree/main)|Jazzy (development branch)|V2025.0, V2025.4|Ubuntu 24.04|
+|[ros2_lyrical](https://github.com/intel/ros2_openvino_toolkit/tree/ros2_lyrical)|Lyrical (pre-release)|V2026.1|Ubuntu 26.04|
 |[ros2_jazzy](https://github.com/intel/ros2_openvino_toolkit/tree/ros2_jazzy)|Jazzy|V2025.0, V2025.4|Ubuntu 24.04|
-|[ros2](https://github.com/intel/ros2_openvino_toolkit/tree/ros2)|Galactic, Foxy, Humble|V2022.1, V2022.2, V2022.3|Ubuntu 20.04, Ubuntu 22.04|
-|[dashing](https://github.com/intel/ros2_openvino_toolkit/tree/dashing)|Dashing|V2022.1, V2022.2, V2022.3|Ubuntu 18.04|
-|[foxy-ov2021.4](https://github.com/intel/ros2_openvino_toolkit/tree/foxy)|Foxy|V2021.4|Ubuntu 20.04|
-|[galactic-ov2021.4](https://github.com/intel/ros2_openvino_toolkit/tree/galactic-ov2021.4)|Galactic|V2021.4|Ubuntu 20.04|
+|[ros2_humble](https://github.com/intel/ros2_openvino_toolkit/tree/ros2_humble)|Humble|V2022.3 or newer|Ubuntu 22.04|
+
+`main` is the development branch and tracks the Jazzy line. `ros2_jazzy`, `ros2_humble` and `ros2_lyrical` are the maintenance branches of each ROS 2 distribution, and each release is tagged as `<distro>/<version>`, for example `jazzy/0.9.0`. Releases for end-of-life distributions (Dashing, Eloquent, Foxy, Galactic) are kept as `archive/*` tags.
 
 ## Inference Features Supported
 * [x] Object Detection
@@ -273,7 +274,9 @@ Sample images are now properly installed to the package share directory, enablin
 * Refer to the quick start document for [yaml configuration guidance](./doc/quick_start/yaml_configuration_guide.md) for detailed configuration guidance.
 
 ## Deploy in Docker
-* Refer to the docker instruction for [docker_instructions](./docker/docker_instructions_ov2.0.md) for detailed information about building docker image and launching.
+* Jazzy: refer to the [Jazzy docker instructions](./docker/ros2_ov2025/ros2_jazzy/docker_instructions.md).
+* Humble: refer to the [Humble docker instructions](./docker/ros2_ov202x/ros2_humble/docker_instructions.md).
+* Lyrical: see the `ros2_lyrical` branch.
 * Refer to the quick start document for [yaml configuration guidance](./doc/quick_start/yaml_configuration_guide.md) for detailed configuration guidance.
 
 # Reference
