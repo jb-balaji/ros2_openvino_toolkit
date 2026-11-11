@@ -177,9 +177,9 @@ bool Models::ObjectSegmentationInstanceModel::fetchResults(
 
   ov::InferRequest request = engine->getRequest();
   std::string det_output = getOutputName("detection");
-  const ov::Tensor det_output_tensor = request.get_tensor(det_output);
+  ov::Tensor det_output_tensor = request.get_tensor(det_output);
   ov::Shape det_output_shape = det_output_tensor.get_shape();
-  auto* detections = det_output_tensor.data<float>();
+  float* detections = det_output_tensor.data<float>();
   int rows = det_output_shape.at(1);
   int dimentions = det_output_shape.at(2);
   cv::Mat output_buffer(det_output_shape[1], det_output_shape[2], CV_32F, detections);
@@ -235,7 +235,7 @@ bool Models::ObjectSegmentationInstanceModel::fetchResults(
   std::vector<int> nms_result;
   cv::dnn::NMSBoxes(boxes, confidences, confidence_thresh, NMS_THRESHOLD, nms_result);
 
-  const ov::Tensor mask_output_tensor = request.get_tensor(getOutputName("masks"));
+  ov::Tensor mask_output_tensor = request.get_tensor(getOutputName("masks"));
   ov::Shape mask_output_shape = mask_output_tensor.get_shape();
   // const ov::Layout mask_layout {"NCHW"}; //must be "NCHW"?
   const auto MASK_CHANNEL = mask_output_shape[1];

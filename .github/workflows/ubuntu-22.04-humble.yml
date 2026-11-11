@@ -49,7 +49,7 @@ jobs:
         cp -rf ${GITHUB_WORKSPACE} ~/ros2_ws/src
         cd ~/ros2_ws/src
         git clone https://github.com/intel/ros2_object_msgs.git
-        cd ros2_object_msgs && git checkout ros2 && cd ~/ros2_ws/
+        cd ~/ros2_ws/
         source /opt/ros/humble/setup.bash
         source /opt/intel/openvino_2024/setupvars.sh
         colcon build --cmake-args -DCMAKE_BUILD_TYPE=Release

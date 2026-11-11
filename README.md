@@ -24,9 +24,13 @@
 # Overview
 ## ROS2 Version Supported
 
+Pick the branch that matches your ROS 2 distribution. Each branch carries its own build and run instructions.
+
 |Branch Name|ROS2 Version Supported|OpenVINO Version|OS Version|
 |-----------------------|-----------------------|--------------------------------|----------------------|
+|[ros2_lyrical](https://github.com/intel/ros2_openvino_toolkit/tree/ros2_lyrical)|Lyrical|V2026.1|Ubuntu 26.04|
 |[ros2_jazzy](https://github.com/intel/ros2_openvino_toolkit/tree/ros2_jazzy)|Jazzy|V2025.0, V2025.4|Ubuntu 24.04|
+|[ros2_humble](https://github.com/intel/ros2_openvino_toolkit/tree/ros2_humble)|Humble|V2022.3 or newer|Ubuntu 22.04|
 |[ros2](https://github.com/intel/ros2_openvino_toolkit/tree/ros2)|Galactic, Foxy, Humble|V2022.1, V2022.2, V2022.3|Ubuntu 20.04, Ubuntu 22.04|
 |[dashing](https://github.com/intel/ros2_openvino_toolkit/tree/dashing)|Dashing|V2022.1, V2022.2, V2022.3|Ubuntu 18.04|
 |[foxy-ov2021.4](https://github.com/intel/ros2_openvino_toolkit/tree/foxy)|Foxy|V2021.4|Ubuntu 20.04|
@@ -49,8 +53,8 @@
 |Prerequisite|Mandatory?|Description|
 |-----------------------|-----------------------|--------------------------------|
 |**Processor**|Mandatory|A platform with Intel processors assembled. (Refer to [here](https://software.intel.com/content/www/us/en/develop/articles/openvino-2020-3-lts-relnotes.html) for the full list of Intel processors supported.)|
-|**OS**|Mandatory|We only tested this project under Ubuntu distros. It is recommended to install the corresponding Ubuntu Distro according to the ROS distro that you select to use. **For example: Ubuntu 18.04 for dashing, Ubuntu 20.04 for Foxy and Galactic, Ubuntu 22.04 for Humble.**|
-|**ROS2**|Mandatory|We have already supported active ROS distros (Humble, Galactic, Foxy and Dashing (deprecated)). Choose the one matching your needs. You may find the corresponding branch from the table above in section [**ROS2 Version Supported**](#ros2-version-supported).|
+|**OS**|Mandatory|Only Ubuntu is tested. Use the Ubuntu release that matches your ROS 2 distribution. **For example: Ubuntu 22.04 for Humble, Ubuntu 24.04 for Jazzy, Ubuntu 26.04 for Lyrical.**|
+|**ROS2**|Mandatory|Choose the distribution matching your OS and check out the corresponding branch from the table in section [**ROS2 Version Supported**](#ros2-version-supported).|
 |**OpenVINO**|Mandatory|The version of OpenVINO toolkit is decided by the OS and ROS2 distros you use. See the table above in Section [**ROS2 Version Supported**](#ros2-version-supported).|
 |**RealSense Camera**|Optional|RealSense Camera is optional, you may choose these alternatives as the input: Standard Camera, ROS Image Topic, Video/Image File or RTSP camera.|
 
@@ -180,15 +184,15 @@ Specific topic(s) can be generated and published according to the given inferenc
 |Inference|Published Topic|
 |---|---|
 |People Detection|```/ros2_openvino_toolkit/face_detection```([object_msgs:msg:ObjectsInBoxes](https://github.com/intel/ros2_object_msgs/blob/master/msg/ObjectsInBoxes.msg))|
-|Emotion Recognition|```/ros2_openvino_toolkit/emotions_recognition```([object_msgs:msg:EmotionsStamped](../../../object_msgs/msg/EmotionsStamped.msg))|
-|Age and Gender Recognition|```/ros2_openvino_toolkit/age_genders_Recognition```([object_msgs:msg:AgeGenderStamped](../../../object_msgs/msg/AgeGenderStamped.msg))|
-|Head Pose Estimation|```/ros2_openvino_toolkit/headposes_estimation```([object_msgs:msg:HeadPoseStamped](../../../object_msgs/msg/HeadPoseStamped.msg))|
+|Emotion Recognition|```/ros2_openvino_toolkit/emotions_recognition```([object_msgs:msg:EmotionsStamped](https://github.com/intel/ros2_object_msgs/blob/master/msg/EmotionsStamped.msg))|
+|Age and Gender Recognition|```/ros2_openvino_toolkit/age_genders_Recognition```([object_msgs:msg:AgeGenderStamped](https://github.com/intel/ros2_object_msgs/blob/master/msg/AgeGenderStamped.msg))|
+|Head Pose Estimation|```/ros2_openvino_toolkit/headposes_estimation```([object_msgs:msg:HeadPoseStamped](https://github.com/intel/ros2_object_msgs/blob/master/msg/HeadPoseStamped.msg))|
 |Object Detection|```/ros2_openvino_toolkit/detected_objects```([object_msgs::msg::ObjectsInBoxes](https://github.com/intel/ros2_object_msgs/blob/master/msg/ObjectsInBoxes.msg))|
-|Object Segmentation|```/ros2_openvino_toolkit/segmented_objects```([object_msgs::msg::ObjectsInMasks](../../../object_msgs/msg/ObjectsInMasks.msg))|
-|Object Segmentation Maskrcnn|```/ros2_openvino_toolkit/segmented_objects```([object_msgs::msg::ObjectsInMasks](../../../object_msgs/msg/ObjectsInMasks.msg))|
-|Person Reidentification|```/ros2_openvino_toolkit/reidentified_persons```([object_msgs::msg::ReidentificationStamped](../../../object_msgs/msg/ReidentificationStamped.msg))|
-|Vehicle Detection|```/ros2_openvino_toolkit/detected_vehicles_attribs```([object_msgs::msg::VehicleAttribsStamped](../../../object_msgs/msg/PersonAttributeStamped.msg))|
-|Vehicle License Detection|```/ros2_openvino_toolkit/detected_license_plates```([object_msgs::msg::LicensePlateStamped](../../../object_msgs/msg/LicensePlateStamped.msg))|
+|Object Segmentation|```/ros2_openvino_toolkit/segmented_objects```([object_msgs::msg::ObjectsInMasks](https://github.com/intel/ros2_object_msgs/blob/master/msg/ObjectsInMasks.msg))|
+|Object Segmentation Maskrcnn|```/ros2_openvino_toolkit/segmented_objects```([object_msgs::msg::ObjectsInMasks](https://github.com/intel/ros2_object_msgs/blob/master/msg/ObjectsInMasks.msg))|
+|Person Reidentification|```/ros2_openvino_toolkit/reidentified_persons```([object_msgs::msg::ReidentificationStamped](https://github.com/intel/ros2_object_msgs/blob/master/msg/ReidentificationStamped.msg))|
+|Vehicle Detection|```/ros2_openvino_toolkit/detected_vehicles_attribs```([object_msgs::msg::VehicleAttribsStamped](https://github.com/intel/ros2_object_msgs/blob/master/msg/VehicleAttribsStamped.msg))|
+|Vehicle License Detection|```/ros2_openvino_toolkit/detected_license_plates```([object_msgs::msg::LicensePlateStamped](https://github.com/intel/ros2_object_msgs/blob/master/msg/LicensePlateStamped.msg))|
 </details>
 </p>
 
@@ -203,9 +207,9 @@ Several ROS2 Services are created, expecting to be used in client/server mode, e
 |---|---|
 |Object Detection Service|```/detect_object```([object_msgs::srv::DetectObject](https://github.com/intel/ros2_object_msgs/blob/master/srv/DetectObject.srv))|
 |Face Detection Service|```/detect_face```([object_msgs::srv::DetectObject](https://github.com/intel/ros2_object_msgs/blob/master/srv/DetectObject.srv))|
-|Age Gender Detection Service|```/detect_age_gender```([object_msgs::srv::AgeGender](./object_msgs/srv/AgeGenderSrv.srv))|
-|Headpose Detection Service|```/detect_head_pose```([object_msgs::srv::HeadPose](./object_msgs/srv/HeadPoseSrv.srv))|
-|Emotion Detection Service|```/detect_emotion```([object_msgs::srv::Emotion](./object_msgs/srv/EmotionSrv.srv))|
+|Age Gender Detection Service|```/detect_age_gender```([object_msgs::srv::AgeGender](https://github.com/intel/ros2_object_msgs/blob/master/srv/AgeGenderSrv.srv))|
+|Headpose Detection Service|```/detect_head_pose```([object_msgs::srv::HeadPose](https://github.com/intel/ros2_object_msgs/blob/master/srv/HeadPoseSrv.srv))|
+|Emotion Detection Service|```/detect_emotion```([object_msgs::srv::Emotion](https://github.com/intel/ros2_object_msgs/blob/master/srv/EmotionSrv.srv))|
 </details>
 </p>
 
@@ -237,36 +241,43 @@ For the snapshot of demo results, refer to the following picture.
 
 # Installation and Launching
 
-## New Features in ROS2 Jazzy Branch
-This branch introduces several improvements for enhanced usability and maintainability:
+## Quick Start
+Commands below are for the `ros2_lyrical` branch (Ubuntu 26.04). The full walkthrough, including prerequisites and troubleshooting, is in the [getting started guide](./doc/quick_start/getting_started_with_ros2_ov2.0.md).
 
-### 1. **Unified Path Management System**
-All YAML configuration files now use environment variable placeholders for consistent path resolution:
-- `<OPENVINO_NODE_SHARE>` → System OpenVINO models directory (`/opt/openvino_toolkit`)
-- `<OPENVINO_DATA>` → Package data directory for labels and images
+```bash
+# 1. Get the sources
+mkdir -p ~/ros2_ws/src && cd ~/ros2_ws/src
+git clone https://github.com/intel/ros2_openvino_toolkit -b ros2_lyrical
+git clone https://github.com/intel/ros2_object_msgs
 
-This makes configurations portable across different installations and environments.
+# 2. Build (OpenVINO_DIR tells CMake where OpenVINO is installed)
+cd ~/ros2_ws
+source /opt/ros/lyrical/setup.bash
+export OpenVINO_DIR=$(~/openvino_env/bin/python3 -c "import openvino, os; print(os.path.join(os.path.dirname(openvino.__file__), 'cmake'))")
+colcon build
+source install/setup.bash
 
-### 2. **Launch Helper Utilities**
-New [launch_helpers.py](./sample/launch/launch_helpers.py) module provides automatic path resolution:
-- Dynamically resolves placeholder paths at launch time
-- Creates temporary resolved YAML files
-- Simplifies launch file implementation
+# 3. Download the models and run a demo on a sample image
+ros2 run openvino_node download_models.sh
+ros2 launch openvino_node pipeline_image.launch.py
+```
 
-### 3. **Intel NPU Support**
-Native support for Intel Neural Processing Unit (NPU) acceleration:
-- Available on Intel Core Ultra processors
-- Set `engine: NPU` in YAML configuration files
-- Optimized for low-power inference workloads
-- Compatible with Intel optimized models (FP16)
+### Choose the inference device
+Every sample launch file accepts a `device` argument that overrides the `engine:` value of all models in the YAML file. Without it, the YAML values are used.
 
-### 4. **Enhanced Visualization**
-- Improved RViz2 integration with conditional launching
-- Added timer delays for proper initialization
-- Updated launch files with viewer arguments
+```bash
+ros2 launch openvino_node pipeline_image.launch.py device:=GPU   # CPU, GPU, NPU, AUTO, ...
+```
 
-### 5. **Image Installation**
-Sample images are now properly installed to the package share directory, enabling static image pipeline testing out-of-the-box.
+The device each model actually runs on is printed at startup (`Engine created: requested device=GPU, executing on=GPU.0`) and drawn on the output image next to the FPS (`FPS` is only shown for camera and video inputs).
+
+### Where models and data are located
+|What|Location|
+|---|---|
+|Models|`$OPENVINO_TOOLKIT_DIR/models`, else `~/.local/share/openvino_toolkit/models`, else `/opt/openvino_toolkit/models`|
+|Labels and sample images|Installed with the package (`share/openvino_node/data`)|
+
+The YAML files use the placeholders `<OPENVINO_NODE_SHARE>` (the models location above) and `<OPENVINO_DATA>` (labels and images). The launch files resolve them at start-up, so no path needs to be edited.
 
 ## Deploy in Local Environment
 * Refer to the quick start document for [getting_started_with_ros2](./doc/quick_start/getting_started_with_ros2_ov2.0.md) for detailed installation & launching instructions.

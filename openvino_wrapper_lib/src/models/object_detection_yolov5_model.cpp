@@ -116,9 +116,9 @@ bool Models::ObjectDetectionYolov5Model::fetchResults(const std::shared_ptr<Engi
 
   ov::InferRequest request = engine->getRequest();
   std::string output = getOutputName();
-  const ov::Tensor& output_tensor = request.get_output_tensor();
+  ov::Tensor output_tensor = request.get_output_tensor();
   ov::Shape output_shape = output_tensor.get_shape();
-  auto* detections = output_tensor.data<float>();
+  float* detections = output_tensor.data<float>();
   int rows = output_shape.at(1);
   int dimentions = output_shape.at(2);
   Mat output_buffer(output_shape[1], output_shape[2], CV_32F, detections);

@@ -12,23 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 project(openvino_param_lib)
 
 find_package(ament_cmake REQUIRED)
 find_package(yaml_cpp_vendor REQUIRED)
 
-include_directories(include
-  ${yaml_cpp_vendor_DIR}/../../../opt/yaml_cpp_vendor/include)
-
 add_library(${PROJECT_NAME} SHARED
   src/param_manager.cpp
 )
 
-ament_target_dependencies(${PROJECT_NAME}
-  "yaml_cpp_vendor"
-)
-target_link_libraries(${PROJECT_NAME} /usr/lib/x86_64-linux-gnu/libyaml-cpp.so)
+target_link_libraries(${PROJECT_NAME} yaml-cpp)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -76,15 +70,28 @@ if(UNIX OR APPLE)
 endif()
 
 # Install nodelet library
+target_include_directories(${PROJECT_NAME} PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+
 install(TARGETS ${PROJECT_NAME}
+  EXPORT ${PROJECT_NAME}Targets
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin)
+
+install(EXPORT ${PROJECT_NAME}Targets
+  FILE ${PROJECT_NAME}Targets.cmake
+  NAMESPACE ${PROJECT_NAME}::
+  DESTINATION share/${PROJECT_NAME}/cmake)
 
 # Install header files
 install(DIRECTORY include/
   DESTINATION include)
 
+ament_export_targets(${PROJECT_NAME}Targets HAS_LIBRARY_TARGET)
+ament_export_dependencies(yaml_cpp_vendor)
 ament_export_include_directories(include)
 ament_export_libraries(${PROJECT_NAME})
 
