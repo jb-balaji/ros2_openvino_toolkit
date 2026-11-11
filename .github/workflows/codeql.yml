@@ -92,11 +92,11 @@ jobs:
             mkdir -p ../workspace
             cp -r ${GITHUB_WORKSPACE}/.ci_local_test/ros2_openvino_toolkit_test ../workspace
             cp -r ${GITHUB_WORKSPACE}  ../workspace/ros2_openvino_toolkit_test
-            ls ${GITHUB_WORKSPACE}/docker/Dockerfile
-            cp ${GITHUB_WORKSPACE}/docker/Dockerfile ../workspace/ros2_openvino_toolkit_test
+            ls ${GITHUB_WORKSPACE}/docker/ros2_ov2025/ros2_jazzy/Dockerfile
+            cp ${GITHUB_WORKSPACE}/docker/ros2_ov2025/ros2_jazzy/Dockerfile ../workspace/ros2_openvino_toolkit_test
             ls ../workspace/ros2_openvino_toolkit_test/Dockerfile
             cd ../workspace/ros2_openvino_toolkit_test
-            docker build --build-arg ROS_PRE_INSTALLED_PKG=galactic-desktop --build-arg VERSION=galactic  -t ros2_openvino_docker:01 .
+            docker build -t ros2_openvino_docker:01 .
 
 
     - name: Perform CodeQL Analysis
