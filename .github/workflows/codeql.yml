@@ -16,6 +16,7 @@ on:
     branches: [ "main", "ros2_humble", "ros2_jazzy", "ros2_lyrical" ]
   pull_request:
     branches: [ "main", "ros2_humble", "ros2_jazzy", "ros2_lyrical" ]
+  workflow_dispatch:
   schedule:
     - cron: '41 23 * * 3'
 
