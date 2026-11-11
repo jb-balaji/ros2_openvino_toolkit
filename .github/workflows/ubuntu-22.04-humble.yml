@@ -5,6 +5,7 @@ on:
     branches: [ "ros2_humble" ]
   pull_request:
     branches: [ "ros2_humble" ]
+  workflow_dispatch:
 
 permissions: read-all
 
