@@ -32,7 +32,7 @@ For ROS2 humble on ubuntu 22.04:
 ```
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
-git clone https://github.com/intel/ros2_openvino_toolkit -b ros2
+git clone https://github.com/intel/ros2_openvino_toolkit -b ros2_jazzy
 git clone https://github.com/intel/ros2_object_msgs
 git clone https://github.com/IntelRealSense/realsense-ros.git -b ros2-development
 git clone https://github.com/ros-perception/vision_opencv.git -b <ROS2_VERSION>
