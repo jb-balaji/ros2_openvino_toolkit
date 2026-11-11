@@ -4,9 +4,9 @@ name: Basic_Func_CI
 
 on:
   push:
-    branches: [ "master", "ros2" ]
+    branches: [ "ros2_humble" ]
   pull_request:
-    branches: [ "master", "ros2" ]
+    branches: [ "ros2_humble" ]
   workflow_dispatch:
 
 permissions:
@@ -19,12 +19,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ubuntu-version: [ubuntu-22.04, ubuntu-24.04]
+        ubuntu-version: [ubuntu-22.04]
         include:
           - ubuntu-version: ubuntu-22.04
             dockerfile: docker/ros2_ov202x/ros2_humble/Dockerfile
-          - ubuntu-version: ubuntu-24.04
-            dockerfile: docker/ros2_ov2025/ros2_jazzy/Dockerfile
 
     steps:
       - name: Checkout repository
