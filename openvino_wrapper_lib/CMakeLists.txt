@@ -30,10 +30,10 @@ set(CMAKE_CXX_FLAGS "-std=c++17 ${CMAKE_CXX_FLAGS}")
 ####################################
 ## to get verbose log,
 ## then, uncomment below line
-add_definitions(-DLOG_LEVEL_DEBUG)
+#add_definitions(-DLOG_LEVEL_DEBUG)
 ####################################
 
-# environment variable OpenVINO_DIR can be use instead of relaive path to specify location of configuration file
+# environment variable OpenVINO_DIR can be use instead of relative path to specify location of configuration file
 
 find_package(OpenVINO REQUIRED)
 if(NOT OpenVINO_FOUND)
@@ -41,7 +41,7 @@ if(NOT OpenVINO_FOUND)
 endif()
 set(OpenVINO_LIBRARIES openvino::runtime)
 
-# Find OpenCV libray if exists
+# Find OpenCV library if exists
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 if(OpenCV_FOUND)
@@ -155,7 +155,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-parameter -Wno-deprecated-de
 
 #The below command is commented in order to ignore "colcon test" errors.
 #This maybe impacts CPU's inference tuning, although we tested on Core i7-6700 and got the similar performance.
-#If you concern the inference performence, you can try to get the resource from the follow url and enable the below line.
+#If you concern the inference performance, you can try to get the resource from the follow url and enable the below line.
 #https://github.com/openvinotoolkit/openvino/tree/2018/inference-engine/src/extension/cmake
 #include(feature_defs OPTIONAL)
 
@@ -189,6 +189,7 @@ add_library(${PROJECT_NAME} SHARED
         src/inferences/head_pose_detection.cpp
         src/inferences/object_segmentation.cpp
         src/inferences/object_segmentation_maskrcnn.cpp
+        src/inferences/object_segmentation_instance.cpp
         src/inferences/person_reidentification.cpp
         src/inferences/person_attribs_detection.cpp
         #src/inferences/landmarks_detection.cpp
@@ -209,6 +210,8 @@ add_library(${PROJECT_NAME} SHARED
         src/models/head_pose_detection_model.cpp
         src/models/object_segmentation_model.cpp
         src/models/object_segmentation_maskrcnn_model.cpp
+        src/models/object_segmentation_instance_model.cpp
+        src/models/object_segmentation_instance_maskrcnn_model.cpp
         src/models/person_reidentification_model.cpp
         src/models/person_attribs_detection_model.cpp
         #src/models/landmarks_detection_model.cpp
@@ -217,6 +220,7 @@ add_library(${PROJECT_NAME} SHARED
         src/models/license_plate_detection_model.cpp
         src/models/object_detection_ssd_model.cpp
         src/models/object_detection_yolov5_model.cpp
+        src/models/object_detection_yolov8_model.cpp
         src/outputs/image_window_output.cpp
         src/outputs/ros_topic_output.cpp
         src/outputs/rviz_output.cpp

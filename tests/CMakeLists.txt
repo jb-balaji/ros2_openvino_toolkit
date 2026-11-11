@@ -31,7 +31,7 @@ if(NOT OpenVINO_FOUND)
 endif()
 set(OpenVINO_LIBRARIES openvino::runtime)
 
-# Find OpenCV libray if exists
+# Find OpenCV library if exists
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 if(OpenCV_FOUND)
@@ -141,6 +141,9 @@ if(BUILD_TESTING)
   macro(custom_gtest target)
     ament_add_gtest(${target} ${ARGN})
     if(TARGET ${target})
+      # Link against OpenVINO first to resolve symbols
+      target_link_libraries(${target}
+        openvino::runtime)
       ament_target_dependencies(${target}
         "rclcpp"
         "openvino_param_lib"

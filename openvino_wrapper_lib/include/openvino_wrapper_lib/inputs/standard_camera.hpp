@@ -22,14 +22,12 @@
 
 #include <opencv2/opencv.hpp>
 
-
 #include "openvino_wrapper_lib/inputs/base_input.hpp"
 #include <stdio.h>
 #include <linux/videodev2.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
-
 
 namespace Input
 {
@@ -40,6 +38,7 @@ namespace Input
 class StandardCamera : public BaseInputDevice
 {
 public:
+  StandardCamera(const std::string& camera = "");
   /**
    * @brief Initialize the input device,
    * for cameras, it will turn the camera on and get ready to read frames,
@@ -56,12 +55,13 @@ public:
    * @brief Read next frame, and give the value to argument frame.
    * @return Whether the next frame is successfully read.
    */
-  bool read(cv::Mat * frame) override;
+  bool read(cv::Mat* frame) override;
 
 private:
   int getCameraId();
   cv::VideoCapture cap;
   int camera_id_ = -1;
+  std::string device_path_;
 };
 }  // namespace Input
 #endif  // OPENVINO_WRAPPER_LIB__INPUTS__STANDARD_CAMERA_HPP_

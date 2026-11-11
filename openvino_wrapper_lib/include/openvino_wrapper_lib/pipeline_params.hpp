@@ -54,8 +54,12 @@ const char kInferTpye_HeadPoseEstimation[] = "HeadPoseEstimation";
 const char kInferTpye_ObjectDetection[] = "ObjectDetection";
 const char kInferTpye_ObjectSegmentation[] = "ObjectSegmentation";
 const char kInferTpye_ObjectSegmentationMaskrcnn[] = "ObjectSegmentationMaskrcnn";
+const char kInferTpye_ObjectSegmentationInstance[] = "ObjectSegmentationInstance";
+const char kInferTpye_ObjectSegmentationTypeYolo[] = "yolo";
+const char kInferTpye_ObjectSegmentationTypeMaskrcnn[] = "maskrcnn";
 const char kInferTpye_ObjectDetectionTypeSSD[] = "SSD";
 const char kInferTpye_ObjectDetectionTypeYolov5[] = "yolov5";
+const char kInferTpye_ObjectDetectionTypeYolov8[] = "yolov8";
 const char kInferTpye_PersonReidentification[] = "PersonReidentification";
 const char kInferTpye_PersonAttribsDetection[] = "PersonAttribsDetection";
 const char kInferTpye_LandmarksDetection[] = "LandmarksDetection";
@@ -71,15 +75,15 @@ const char kInferTpye_LicensePlateDetection[] = "LicensePlateDetection";
 class PipelineParams
 {
 public:
-  explicit PipelineParams(const std::string & name);
-  explicit PipelineParams(const Params::ParamManager::PipelineRawData & params);
-  Params::ParamManager::PipelineRawData getPipeline(const std::string & name);
-  PipelineParams & operator=(const Params::ParamManager::PipelineRawData & params);
+  explicit PipelineParams(const std::string& name);
+  explicit PipelineParams(const Params::ParamManager::PipelineRawData& params);
+  Params::ParamManager::PipelineRawData getPipeline(const std::string& name);
+  PipelineParams& operator=(const Params::ParamManager::PipelineRawData& params);
   void update();
-  void update(const Params::ParamManager::PipelineRawData & params);
-  bool isOutputTo(std::string & name);
+  void update(const Params::ParamManager::PipelineRawData& params);
+  bool isOutputTo(std::string& name);
   bool isGetFps();
-  std::string findFilterConditions(const std::string & input, const std::string & output);
+  std::string findFilterConditions(const std::string& input, const std::string& output);
 
 private:
   Params::ParamManager::PipelineRawData params_;

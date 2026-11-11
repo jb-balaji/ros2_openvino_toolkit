@@ -68,7 +68,7 @@ if(OpenCV_FOUND)
     message(STATUS "OpenCV_INCLUDE_DIRS=${OpenCV_INCLUDE_DIRS}")
     message(STATUS "OpenCV_LIBS=${OpenCV_LIBS}")
 else()
-    message(STATUS "OPENCV is disabled or not found, " ${PROJECT_NAME} " skiped")
+    message(STATUS "OPENCV is disabled or not found, " ${PROJECT_NAME} " skipped")
     return()
 endif()
 
@@ -281,6 +281,18 @@ install(DIRECTORY
 install(DIRECTORY
   launch
   DESTINATION share/${PROJECT_NAME}/
+)
+
+# Install data/labels files.
+install(DIRECTORY
+  ../data/labels
+  DESTINATION share/${PROJECT_NAME}/data/
+)
+
+# Install data/images files.
+install(DIRECTORY
+  ../data/images
+  DESTINATION share/${PROJECT_NAME}/data/
 )
 
 if(BUILD_TESTING)
