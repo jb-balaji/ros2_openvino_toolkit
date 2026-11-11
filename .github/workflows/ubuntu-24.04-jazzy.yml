@@ -5,6 +5,7 @@ on:
     branches: [ "ros2_jazzy" ]
   pull_request:
     branches: [ "ros2_jazzy" ]
+  workflow_dispatch:
 
 permissions: read-all
 
