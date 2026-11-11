@@ -31,10 +31,8 @@ Pick the branch that matches your ROS 2 distribution. Each branch carries its ow
 |[ros2_lyrical](https://github.com/intel/ros2_openvino_toolkit/tree/ros2_lyrical)|Lyrical|V2026.1|Ubuntu 26.04|
 |[ros2_jazzy](https://github.com/intel/ros2_openvino_toolkit/tree/ros2_jazzy)|Jazzy|V2025.0, V2025.4|Ubuntu 24.04|
 |[ros2_humble](https://github.com/intel/ros2_openvino_toolkit/tree/ros2_humble)|Humble|V2022.3 or newer|Ubuntu 22.04|
-|[ros2](https://github.com/intel/ros2_openvino_toolkit/tree/ros2)|Galactic, Foxy, Humble|V2022.1, V2022.2, V2022.3|Ubuntu 20.04, Ubuntu 22.04|
-|[dashing](https://github.com/intel/ros2_openvino_toolkit/tree/dashing)|Dashing|V2022.1, V2022.2, V2022.3|Ubuntu 18.04|
-|[foxy-ov2021.4](https://github.com/intel/ros2_openvino_toolkit/tree/foxy)|Foxy|V2021.4|Ubuntu 20.04|
-|[galactic-ov2021.4](https://github.com/intel/ros2_openvino_toolkit/tree/galactic-ov2021.4)|Galactic|V2021.4|Ubuntu 20.04|
+
+Only the active ROS 2 distributions above are maintained. Releases for end-of-life distributions (Dashing, Eloquent, Foxy, Galactic) are kept as `archive/*` tags, for example `git checkout archive/foxy-ov2021.4`.
 
 ## Inference Features Supported
 * [x] Object Detection
@@ -285,7 +283,8 @@ The YAML files use the placeholders `<OPENVINO_NODE_SHARE>` (the models location
 
 ## Deploy in Docker
 * Lyrical: refer to the [Lyrical docker instructions](./docker/ros2_ov2026/ros2_lyrical/docker_instructions.md) for building the image and launching the demos.
-* Other ROS 2 distributions: refer to the docker instruction for [docker_instructions](./docker/docker_instructions_ov2.0.md) for detailed information about building docker image and launching.
+* Jazzy: refer to the [Jazzy docker instructions](./docker/ros2_ov2025/ros2_jazzy/docker_instructions.md).
+* Humble: refer to the [Humble docker instructions](./docker/ros2_ov202x/ros2_humble/docker_instructions.md).
 * Refer to the quick start document for [yaml configuration guidance](./doc/quick_start/yaml_configuration_guide.md) for detailed configuration guidance.
 
 # Reference

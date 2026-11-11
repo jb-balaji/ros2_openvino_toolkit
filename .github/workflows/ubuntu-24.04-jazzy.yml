@@ -2,9 +2,9 @@ name: Ubuntu-24.04-Jazzy-CI
 
 on:
   push:
-    branches: [ "ros2" ]
+    branches: [ "ros2_jazzy" ]
   pull_request:
-    branches: [ "ros2" ]
+    branches: [ "ros2_jazzy" ]
 
 permissions: read-all
 

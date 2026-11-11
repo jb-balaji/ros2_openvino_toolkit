@@ -2,9 +2,9 @@ name: Ubuntu-22.04-Humble-CI
 
 on:
   push:
-    branches: [ "ros2" ]
+    branches: [ "ros2_humble" ]
   pull_request:
-    branches: [ "ros2" ]
+    branches: [ "ros2_humble" ]
 
 permissions: read-all
 
