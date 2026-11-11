@@ -5,6 +5,7 @@ on:
     branches: [ "ros2_lyrical" ]
   pull_request:
     branches: [ "ros2_lyrical" ]
+  workflow_dispatch:
 
 permissions: read-all
 
