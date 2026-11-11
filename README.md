@@ -284,7 +284,8 @@ The YAML files use the placeholders `<OPENVINO_NODE_SHARE>` (the models location
 * Refer to the quick start document for [yaml configuration guidance](./doc/quick_start/yaml_configuration_guide.md) for detailed configuration guidance.
 
 ## Deploy in Docker
-* Refer to the docker instruction for [docker_instructions](./docker/docker_instructions_ov2.0.md) for detailed information about building docker image and launching.
+* Lyrical: refer to the [Lyrical docker instructions](./docker/ros2_ov2026/ros2_lyrical/docker_instructions.md) for building the image and launching the demos.
+* Other ROS 2 distributions: refer to the docker instruction for [docker_instructions](./docker/docker_instructions_ov2.0.md) for detailed information about building docker image and launching.
 * Refer to the quick start document for [yaml configuration guidance](./doc/quick_start/yaml_configuration_guide.md) for detailed configuration guidance.
 
 # Reference
