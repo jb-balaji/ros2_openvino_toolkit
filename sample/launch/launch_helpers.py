@@ -116,7 +116,7 @@ def resolve_yaml_paths(yaml_filename, package_name='openvino_node'):
     for model in re.findall(r'^\s*model:\s*(\S+)', yaml_content, re.MULTILINE):
         if not os.path.isfile(model):
             print('[launch_helpers] WARNING: model not found: %s\n'
-                  '  Set %s or run: ros2 run %s download_models.sh'
-                  % (model, TOOLKIT_DIR_ENV, package_name))
+                  '  Set %s or run: ros2 run openvino_node download_models.sh'
+                  % (model, TOOLKIT_DIR_ENV))
 
     return resolved_yaml
