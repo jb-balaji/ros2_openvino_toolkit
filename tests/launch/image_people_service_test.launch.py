@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """
-ROS 2 Test Launch File: Image People Service Test
+ROS 2 Test Launch File: Image People Service Test.
 
 Launches the OpenVINO people analytics service for automated testing.
 """
@@ -29,7 +29,6 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     """Generate launch description for image people service test."""
-
     # Get test package share directory
     test_package_dir = get_package_share_directory('openvino_test')
     default_yaml = os.path.join(test_package_dir, 'param', 'image_people_service_test.yaml')

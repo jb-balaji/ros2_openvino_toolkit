@@ -44,7 +44,10 @@ Engines::EngineManager::createEngine_V2022(const std::string& device, const std:
   ov::CompiledModel executable_network = core.compile_model(model->getModel(), device);
   ov::InferRequest infer_request = executable_network.create_infer_request();
 
-  return std::make_shared<Engines::Engine>(infer_request);
+  auto engine = std::make_shared<Engines::Engine>(infer_request, executable_network, device);
+  slog::info << "Engine created: requested device=" << device << ", executing on=" << engine->getDeviceName()
+             << slog::endl;
+  return engine;
 }
 
 #if (defined(USE_OLD_E_PLUGIN_API))

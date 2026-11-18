@@ -26,33 +26,26 @@ Models::LandmarksDetectionModel::LandmarksDetectionModel(const std::string& labe
 {
 }
 
-void Models::LandmarksDetectionModel::setLayerProperty(InferenceEngine::CNNNetwork& model)
+bool Models::LandmarksDetectionModel::updateLayerProperty(std::shared_ptr<ov::Model>& model)
 {
-  // set input property
-  InferenceEngine::InputsDataMap input_info_map(model.getInputsInfo());
-  InferenceEngine::InputInfo::Ptr input_info = input_info_map.begin()->second;
-  input_info->setPrecision(InferenceEngine::Precision::U8);
-  input_info->getInputData()->setLayout(InferenceEngine::Layout::NCHW);
-  // set output property
-  InferenceEngine::OutputsDataMap output_info_map(model.getOutputsInfo());
-  InferenceEngine::DataPtr& output_data_ptr = output_info_map.begin()->second;
-  output_data_ptr->setPrecision(InferenceEngine::Precision::FP32);
-  output_data_ptr->setLayout(InferenceEngine::Layout::NCHW);
-  // set input and output layer name
-  input_ = input_info_map.begin()->first;
-  output_ = output_info_map.begin()->first;
-}
-
-void Models::LandmarksDetectionModel::checkLayerProperty(const InferenceEngine::CNNNetReader::Ptr& model)
-{
-  InferenceEngine::InputsDataMap input_info_map(model->getNetwork().getInputsInfo());
-  if (input_info_map.size() != 1) {
+  slog::info << "Checking Inputs for Model" << getModelName() << slog::endl;
+  if (model->inputs().size() != 1) {
     throw std::logic_error("Landmarks Detection topology should have only one input");
   }
-  InferenceEngine::OutputsDataMap output_info_map(model->getNetwork().getOutputsInfo());
-  if (output_info_map.size() != 1) {
+  if (model->outputs().size() != 1) {
     throw std::logic_error("Landmarks Detection Network expects networks having one output");
   }
+  ov::preprocess::PrePostProcessor ppp = ov::preprocess::PrePostProcessor(model);
+  input_ = model->input().get_any_name();
+  const ov::Layout input_tensor_layout{ "NCHW" };
+  ppp.input(input_).tensor().set_element_type(ov::element::u8).set_layout(input_tensor_layout);
+  output_ = model->output().get_any_name();
+  ppp.output(output_).tensor().set_element_type(ov::element::f32);
+
+  model = ppp.build();
+  ov::set_batch(model, getMaxBatchSize());
+
+  return true;
 }
 
 const std::string Models::LandmarksDetectionModel::getModelCategory() const

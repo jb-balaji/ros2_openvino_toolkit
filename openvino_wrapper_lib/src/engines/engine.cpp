@@ -30,3 +30,25 @@ Engines::Engine::Engine(ov::InferRequest& request)
 {
   request_ = request;
 }
+
+Engines::Engine::Engine(ov::InferRequest& request, const ov::CompiledModel& compiled_model,
+                        const std::string& requested_device)
+  : request_(request), compiled_model_(compiled_model), requested_device_(requested_device)
+{
+}
+
+std::string Engines::Engine::getDeviceName() const
+{
+  try {
+    std::string devices;
+    for (const auto& device : compiled_model_.get_property(ov::execution_devices)) {
+      devices += (devices.empty() ? "" : ",") + device;
+    }
+    if (!devices.empty()) {
+      return devices;
+    }
+  } catch (const std::exception&) {
+    // plugin doesn't report execution devices, use the requested one
+  }
+  return requested_device_;
+}

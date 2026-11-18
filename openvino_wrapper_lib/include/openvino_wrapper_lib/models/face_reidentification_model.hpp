@@ -46,6 +46,7 @@ public:
   const std::string getModelCategory() const override;
 
 protected:
+  bool updateLayerProperty(std::shared_ptr<ov::Model>&) override;
   std::string input_;
   std::string output_;
 };

@@ -23,12 +23,10 @@
 #include <utility>
 #include <map>
 
-#if 0  // in current versions, these models are not supported any more.
 #include "openvino_wrapper_lib/inferences/landmarks_detection.hpp"
 #include "openvino_wrapper_lib/inferences/face_reidentification.hpp"
 #include "openvino_wrapper_lib/models/face_reidentification_model.hpp"
 #include "openvino_wrapper_lib/models/landmarks_detection_model.hpp"
-#endif
 
 #include "openvino_wrapper_lib/models/vehicle_attribs_detection_model.hpp"
 #include "openvino_wrapper_lib/models/license_plate_detection_model.hpp"
@@ -218,12 +216,11 @@ PipelineManager::parseInference(const Params::ParamManager::PipelineRawData& par
       object = createPersonReidentification(infer);
     } else if (infer.name == kInferType_PersonAttribsDetection) {
       object = createPersonAttribsDetection(infer);
-    } /*else if (infer.name == kInferType_LandmarksDetection) {
+    } else if (infer.name == kInferType_LandmarksDetection) {
       object = createLandmarksDetection(infer);
     } else if (infer.name == kInferType_FaceReidentification) {
       object = createFaceReidentification(infer);
-    } */
-    else if (infer.name == kInferType_VehicleAttribsDetection) {
+    } else if (infer.name == kInferType_VehicleAttribsDetection) {
       object = createVehicleAttribsDetection(infer);
     } else if (infer.name == kInferType_LicensePlateDetection) {
       object = createLicensePlateDetection(infer);
@@ -438,6 +435,32 @@ PipelineManager::createPersonAttribsDetection(const Params::ParamManager::Infere
   return attribs_inference_ptr;
 }
 
+std::shared_ptr<openvino_wrapper_lib::BaseInference>
+PipelineManager::createLandmarksDetection(const Params::ParamManager::InferenceRawData& infer)
+{
+  auto model = std::make_shared<Models::LandmarksDetectionModel>(infer.label, infer.model, infer.batch);
+  model->modelInit();
+  auto engine = engine_manager_.createEngine(infer.engine, model);
+  auto landmarks_inference_ptr = std::make_shared<openvino_wrapper_lib::LandmarksDetection>();
+  landmarks_inference_ptr->loadNetwork(model);
+  landmarks_inference_ptr->loadEngine(engine);
+
+  return landmarks_inference_ptr;
+}
+
+std::shared_ptr<openvino_wrapper_lib::BaseInference>
+PipelineManager::createFaceReidentification(const Params::ParamManager::InferenceRawData& infer)
+{
+  auto model = std::make_shared<Models::FaceReidentificationModel>(infer.label, infer.model, infer.batch);
+  model->modelInit();
+  auto engine = engine_manager_.createEngine(infer.engine, model);
+  auto face_reid_ptr = std::make_shared<openvino_wrapper_lib::FaceReidentification>(infer.confidence_threshold);
+  face_reid_ptr->loadNetwork(model);
+  face_reid_ptr->loadEngine(engine);
+
+  return face_reid_ptr;
+}
+
 #if 0
 std::shared_ptr<openvino_wrapper_lib::BaseInference>
 PipelineManager::createPersonReidentification(
@@ -470,38 +493,6 @@ PipelineManager::createPersonAttribsDetection(
   attribs_inference_ptr->loadEngine(engine);
 
   return attribs_inference_ptr;
-}
-
-std::shared_ptr<openvino_wrapper_lib::BaseInference>
-PipelineManager::createLandmarksDetection(
-  const Params::ParamManager::InferenceRawData & infer)
-{
-  auto model =
-    std::make_shared<Models::LandmarksDetectionModel>(infer.model, infer.batch);
-  model->modelInit();
-  auto engine = engine_manager_.createEngine(infer.engine, model);
-  auto landmarks_inference_ptr =
-    std::make_shared<openvino_wrapper_lib::LandmarksDetection>();
-  landmarks_inference_ptr->loadNetwork(model);
-  landmarks_inference_ptr->loadEngine(engine);
-
-  return landmarks_inference_ptr;
-}
-
-std::shared_ptr<openvino_wrapper_lib::BaseInference>
-PipelineManager::createFaceReidentification(
-  const Params::ParamManager::InferenceRawData & infer)
-{
-  auto model =
-    std::make_shared<Models::FaceReidentificationModel>(infer.model, infer.batch);
-  model->modelInit();
-  auto engine = engine_manager_.createEngine(infer.engine, model);
-  auto face_reid_ptr =
-    std::make_shared<openvino_wrapper_lib::FaceReidentification>(infer.confidence_threshold);
-  face_reid_ptr->loadNetwork(model);
-  face_reid_ptr->loadEngine(engine);
-
-  return face_reid_ptr;
 }
 
 std::shared_ptr<openvino_wrapper_lib::BaseInference>

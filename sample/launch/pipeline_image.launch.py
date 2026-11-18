@@ -108,7 +108,7 @@ def generate_launch_description():
             name='openvino_pipeline',
             arguments=['-config', LaunchConfiguration('yaml_path')],
             remappings=[
-                ('/openvino_toolkit/people/faces',
+                ('/openvino_toolkit/people/detected_objects',
                  '/ros2_openvino_toolkit/face_detection'),
                 ('/openvino_toolkit/people/emotions',
                  '/ros2_openvino_toolkit/emotions_recognition'),

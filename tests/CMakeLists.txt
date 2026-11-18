@@ -40,7 +40,8 @@ endif()
 
 find_package(realsense2)
 if(NOT realsense2_FOUND)
-  message(FATAL_ERROR "\n\n Intel RealSense SDK 2.0 is missing, please install it from https://github.com/IntelRealSense/librealsense/releases\n\n")
+  message(FATAL_ERROR "\n\n Intel RealSense SDK 2.0 is missing, please install it from "
+    "https://github.com/realsenseai/librealsense/releases\n\n")
 endif()
 
 find_package(ament_cmake REQUIRED)
@@ -122,10 +123,26 @@ include_directories(
     ${realsense2_INCLUDE_DIRS}
 )
 
-# Install param files.
+# Install param files, resolving @TEST_DATA_DIR@ to the installed test data.
+set(TEST_DATA_DIR ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/data)
+file(GLOB TEST_PARAM_FILES ${CMAKE_CURRENT_SOURCE_DIR}/param/*.yaml)
+foreach(param_file ${TEST_PARAM_FILES})
+  get_filename_component(param_name ${param_file} NAME)
+  configure_file(${param_file} ${CMAKE_CURRENT_BINARY_DIR}/param/${param_name} @ONLY)
+endforeach()
 install(DIRECTORY
-  param
+  ${CMAKE_CURRENT_BINARY_DIR}/param
   DESTINATION share/${PROJECT_NAME}/
+)
+
+# Install test videos plus the images and labels referenced by the test params.
+install(DIRECTORY data/ DESTINATION share/${PROJECT_NAME}/data)
+install(FILES
+  ${CMAKE_CURRENT_SOURCE_DIR}/../data/images/sample_faces.jpg
+  ${CMAKE_CURRENT_SOURCE_DIR}/../data/images/car_vihecle.png
+  ${CMAKE_CURRENT_SOURCE_DIR}/../data/labels/object_detection/coco_91cl_bkgr.labels
+  ${CMAKE_CURRENT_SOURCE_DIR}/../data/labels/object_segmentation/frozen_inference_graph.labels
+  DESTINATION share/${PROJECT_NAME}/data
 )
 
 # Install launch files.
@@ -136,6 +153,9 @@ install(DIRECTORY
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
+  # C++ style is enforced by the repository .clang-format, which conflicts with these linters.
+  set(ament_cmake_cpplint_FOUND TRUE)
+  set(ament_cmake_uncrustify_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 
   macro(custom_gtest target)
@@ -143,19 +163,20 @@ if(BUILD_TESTING)
     if(TARGET ${target})
       # Link against OpenVINO first to resolve symbols
       target_link_libraries(${target}
-        openvino::runtime)
+        openvino::runtime
+        ${realsense2_LIBRARY})
       ament_target_dependencies(${target}
         "rclcpp"
         "openvino_param_lib"
         "object_msgs"
         "openvino_msgs"
-	      "OpenVINO"
-	      "OpenCV"
-	      "realsense2"
+        "OpenVINO"
+        "OpenCV"
+        "realsense2"
         "ament_index_cpp"
         "yaml_cpp_vendor"
         "class_loader"
-	      "openvino_wrapper_lib")
+        "openvino_wrapper_lib")
     endif()
   endmacro()
 

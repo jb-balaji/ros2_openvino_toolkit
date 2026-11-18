@@ -265,6 +265,9 @@ install(TARGETS image_object_client
 install(TARGETS image_people_client
   DESTINATION lib/${PROJECT_NAME})
 
+install(PROGRAMS ../script/download_models.sh
+  DESTINATION lib/${PROJECT_NAME})
+
 install(TARGETS composable_pipeline
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib

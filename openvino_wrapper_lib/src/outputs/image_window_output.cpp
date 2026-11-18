@@ -29,7 +29,7 @@
 Outputs::ImageWindowOutput::ImageWindowOutput(const std::string& output_name, int focal_length)
   : BaseOutput(output_name), focal_length_(focal_length)
 {
-  cv::namedWindow(output_name_, cv::WINDOW_AUTOSIZE);
+  // Window is created lazily by cv::imshow; RvizOutput reuses this class headless.
 }
 
 void Outputs::ImageWindowOutput::feedFrame(const cv::Mat& frame)
@@ -365,10 +365,15 @@ void Outputs::ImageWindowOutput::accept(const std::vector<openvino_wrapper_lib::
 
 void Outputs::ImageWindowOutput::decorateFrame()
 {
+  std::stringstream ss;
   if (getPipeline()->getParameters()->isGetFps()) {
-    int fps = getPipeline()->getFPS();
-    std::stringstream ss;
-    ss << "FPS: " << fps;
+    ss << "FPS: " << getPipeline()->getFPS() << "  ";
+  }
+  const std::string devices = getPipeline()->getDeviceNames();
+  if (!devices.empty()) {
+    ss << "Device: " << devices;
+  }
+  if (!ss.str().empty()) {
     cv::putText(frame_, ss.str(), cv::Point2f(0, 65), cv::FONT_HERSHEY_TRIPLEX, 0.5, cv::Scalar(255, 0, 0));
   }
   for (auto o : outputs_) {

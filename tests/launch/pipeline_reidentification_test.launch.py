@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """
-ROS 2 Test Launch File: Person Re-identification Pipeline Test
+ROS 2 Test Launch File: Person Re-identification Pipeline Test.
 
 Launches the OpenVINO person re-identification pipeline for automated testing.
 """
@@ -29,7 +29,6 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     """Generate launch description for person re-identification test."""
-
     # Get test package share directory
     test_package_dir = get_package_share_directory('openvino_test')
     default_yaml = os.path.join(test_package_dir, 'param', 'pipeline_reidentification_test.yaml')

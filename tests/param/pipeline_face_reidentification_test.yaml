@@ -1,6 +1,7 @@
 Pipelines:
 - name: people
-  inputs: [RealSenseCamera]
+  inputs: [Video]
+  input_path: @TEST_DATA_DIR@/face_reid.mp4
   infers:
     - name: FaceDetection
       model: /opt/openvino_toolkit/models/intel/face-detection-adas-0001/FP16/face-detection-adas-0001.xml
@@ -22,7 +23,7 @@ Pipelines:
       confidence_threshold: 0.9
   outputs: [RosTopic]
   connects:
-    - left: RealSenseCamera
+    - left: Video
       right: [FaceDetection]
     - left: FaceDetection
       right: [LandmarksDetection, FaceReidentification]

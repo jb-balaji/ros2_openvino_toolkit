@@ -123,6 +123,10 @@ public:
   {
     return fps_;
   }
+  /**
+   * @brief Get the unique compute device(s) used by the pipeline's inferences, e.g. "CPU" or "CPU,GPU.0".
+   */
+  std::string getDeviceNames() const;
 
   std::string findFilterConditions(const std::string& input, const std::string& output)
   {

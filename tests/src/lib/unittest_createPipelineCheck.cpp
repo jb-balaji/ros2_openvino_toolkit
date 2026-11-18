@@ -15,6 +15,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <gtest/gtest.h>
 #include <ament_index_cpp/get_resource.hpp>
+#include <librealsense2/rs.hpp>
 #include <openvino_param_lib/param_manager.hpp>
 
 #include <unistd.h>
@@ -72,6 +73,9 @@ TEST(UnitTestCheckPipeline, testCreatePipeline)
 
 TEST(UnitTestCheckPipeline, testCreatePipelineRealsense)
 {
+  if (rs2::context().query_devices().size() == 0) {
+    GTEST_SKIP() << "No RealSense device connected";
+  }
   auto node = rclcpp::Node::make_shared("pipeline_realsense_test");
   std::string config_files = "pipeline_object_yolo_test.yaml";
   std::string config_file = getConfigPath(config_files);

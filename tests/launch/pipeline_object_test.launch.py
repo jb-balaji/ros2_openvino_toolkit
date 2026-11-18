@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """
-ROS 2 Test Launch File: Object Detection Pipeline Test
+ROS 2 Test Launch File: Object Detection Pipeline Test.
 
 Launches the OpenVINO object detection pipeline for automated testing.
 """
@@ -29,7 +29,6 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     """Generate launch description for object detection test."""
-
     # Get test package share directory
     test_package_dir = get_package_share_directory('openvino_test')
     default_yaml = os.path.join(test_package_dir, 'param', 'pipeline_object_test.yaml')
