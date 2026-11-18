@@ -1,12 +1,12 @@
 Pipelines:
 - name: segmentation
   inputs: [Video]
-  input_path: @TEST_DATA_DIR@/segmentation.mp4
+  input_path: <OPENVINO_TEST_DATA>/segmentation.mp4
   infers:
     - name: ObjectSegmentation
-      model: /opt/openvino_toolkit/models/convert/public/deeplabv3/FP16/deeplabv3.xml
-      engine: GPU
-      label: @TEST_DATA_DIR@/frozen_inference_graph.labels
+      model: <OPENVINO_NODE_SHARE>/models/intel/semantic-segmentation-adas-0001/FP16/semantic-segmentation-adas-0001.xml
+      engine: CPU
+      label: <OPENVINO_DATA>/labels/object_segmentation/frozen_inference_graph.labels
       batch: 1
       confidence_threshold: 0.5
       enable_roi_constraint: true # set enable_roi_constraint to false if you don't want to make the inferred ROI (region of interest) constrained into the camera frame

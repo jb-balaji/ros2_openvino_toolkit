@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 
 project(openvino_test)
 
@@ -26,6 +26,7 @@ set(CMAKE_CXX_FLAGS "-std=c++17 ${CMAKE_CXX_FLAGS}")
 ####################################
 
 find_package(OpenVINO)
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
 if(NOT OpenVINO_FOUND)
     message(FATAL_ERROR "")
 endif()
@@ -123,26 +124,10 @@ include_directories(
     ${realsense2_INCLUDE_DIRS}
 )
 
-# Install param files, resolving @TEST_DATA_DIR@ to the installed test data.
-set(TEST_DATA_DIR ${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/data)
-file(GLOB TEST_PARAM_FILES ${CMAKE_CURRENT_SOURCE_DIR}/param/*.yaml)
-foreach(param_file ${TEST_PARAM_FILES})
-  get_filename_component(param_name ${param_file} NAME)
-  configure_file(${param_file} ${CMAKE_CURRENT_BINARY_DIR}/param/${param_name} @ONLY)
-endforeach()
+# Install param files.
 install(DIRECTORY
-  ${CMAKE_CURRENT_BINARY_DIR}/param
+  param
   DESTINATION share/${PROJECT_NAME}/
-)
-
-# Install test videos plus the images and labels referenced by the test params.
-install(DIRECTORY data/ DESTINATION share/${PROJECT_NAME}/data)
-install(FILES
-  ${CMAKE_CURRENT_SOURCE_DIR}/../data/images/sample_faces.jpg
-  ${CMAKE_CURRENT_SOURCE_DIR}/../data/images/car_vihecle.png
-  ${CMAKE_CURRENT_SOURCE_DIR}/../data/labels/object_detection/coco_91cl_bkgr.labels
-  ${CMAKE_CURRENT_SOURCE_DIR}/../data/labels/object_segmentation/frozen_inference_graph.labels
-  DESTINATION share/${PROJECT_NAME}/data
 )
 
 # Install launch files.
@@ -151,11 +136,18 @@ install(DIRECTORY
   DESTINATION share/${PROJECT_NAME}/
 )
 
+# Install test videos.
+install(DIRECTORY
+  data
+  DESTINATION share/${PROJECT_NAME}/
+)
+
 if(BUILD_TESTING)
-  find_package(ament_lint_auto REQUIRED)
-  # C++ style is enforced by the repository .clang-format, which conflicts with these linters.
+  # C++ style is enforced with clang-format (see .clang-format and the Code_Format_Check
+  # workflow), which conflicts with the ament cpplint/uncrustify rules.
   set(ament_cmake_cpplint_FOUND TRUE)
   set(ament_cmake_uncrustify_FOUND TRUE)
+  find_package(ament_lint_auto REQUIRED)
   ament_lint_auto_find_test_dependencies()
 
   macro(custom_gtest target)

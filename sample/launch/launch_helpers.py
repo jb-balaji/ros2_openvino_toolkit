@@ -74,25 +74,26 @@ def resolve_yaml_paths(yaml_filename, package_name='openvino_node'):
 
     Replaces the following placeholders:
     - <OPENVINO_NODE_SHARE> -> toolkit directory (see get_toolkit_dir())
-    - <OPENVINO_DATA> -> Package share directory + /data (labels, images)
+    - <OPENVINO_DATA> -> openvino_node share directory + /data (labels, images)
+    - <OPENVINO_TEST_DATA> -> share directory of package_name + /data
+      (e.g. test videos installed by openvino_test)
 
     Args:
         yaml_filename: Name of the YAML file (e.g., 'pipeline_people.yaml')
-        package_name: ROS2 package name (default: 'openvino_node')
+        package_name: ROS2 package that owns the YAML file in its 'param'
+            directory (default: 'openvino_node')
 
     Returns:
         Path to the resolved YAML file (temporary file)
     """
-    # Get package share directory
     package_share_dir = get_package_share_directory(package_name)
+    node_share_dir = get_package_share_directory('openvino_node')
     original_yaml = os.path.join(package_share_dir, 'param', yaml_filename)
     toolkit_dir = get_toolkit_dir()
 
-    # Create a temporary directory for resolved YAML
     temp_dir = tempfile.mkdtemp(prefix='openvino_')
     resolved_yaml = os.path.join(temp_dir, yaml_filename)
 
-    # Read and process the YAML file
     with open(original_yaml, 'r') as f:
         yaml_content = f.read()
 
@@ -102,12 +103,12 @@ def resolve_yaml_paths(yaml_filename, package_name='openvino_node'):
                               yaml_content, flags=re.MULTILINE)
         print('[launch_helpers] Using inference device: %s' % device)
 
-    # Replace placeholders with actual paths
     yaml_content = yaml_content.replace('<OPENVINO_NODE_SHARE>', toolkit_dir)
-    # Data (labels, images) use package installation
-    yaml_content = yaml_content.replace('<OPENVINO_DATA>', os.path.join(package_share_dir, 'data'))
+    yaml_content = yaml_content.replace(
+        '<OPENVINO_DATA>', os.path.join(node_share_dir, 'data'))
+    yaml_content = yaml_content.replace(
+        '<OPENVINO_TEST_DATA>', os.path.join(package_share_dir, 'data'))
 
-    # Write the resolved YAML
     with open(resolved_yaml, 'w') as f:
         f.write(yaml_content)
 

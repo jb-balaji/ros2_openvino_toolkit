@@ -1,13 +1,13 @@
 Pipelines:
 - name: object
   inputs: [Video]
-  input_path: @TEST_DATA_DIR@/object_detection.mp4
+  input_path: <OPENVINO_TEST_DATA>/object_detection.mp4
   infers:
     - name: ObjectDetection
-      model: /opt/openvino_toolkit/models/convert/public/ssdlite_mobilenet_v2/FP16/ssdlite_mobilenet_v2.xml
-      engine: GPU
-      label: @TEST_DATA_DIR@/coco_91cl_bkgr.labels
-      batch: 16
+      model: <OPENVINO_NODE_SHARE>/models/intel/vehicle-license-plate-detection-barrier-0106/FP32/vehicle-license-plate-detection-barrier-0106.xml
+      engine: CPU
+      label: <OPENVINO_DATA>/labels/object_detection/vehicle-license-plate-detection-barrier-0106.labels
+      batch: 1
       confidence_threshold: 0.5
       enable_roi_constraint: true # set enable_roi_constraint to false if you don't want to make the inferred ROI (region of interest) constrained into the camera frame
   outputs: [RosTopic]
