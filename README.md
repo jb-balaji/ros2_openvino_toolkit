@@ -1,5 +1,34 @@
 # ros2_openvino_toolkit
 
+## Build Status
+
+| ROS 2 | Ubuntu | Branch | Build | Debian Package | Code Format |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| Humble | 22.04 | `ros2_humble` | [![Build][humble-build-badge]][humble-build] | [![Debian Package][humble-deb-badge]][humble-deb] | [![Code Format][humble-format-badge]][humble-format] |
+| Jazzy | 24.04 | `ros2_jazzy` | [![Build][jazzy-build-badge]][jazzy-build] | [![Debian Package][jazzy-deb-badge]][jazzy-deb] | [![Code Format][jazzy-format-badge]][jazzy-format] |
+| Lyrical | 26.04 | `ros2_lyrical` | [![Build][lyrical-build-badge]][lyrical-build] | [![Debian Package][lyrical-deb-badge]][lyrical-deb] | [![Code Format][lyrical-format-badge]][lyrical-format] |
+
+[humble-build-badge]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/ubuntu-22.04-humble.yml/badge.svg?branch=ros2_humble
+[humble-build]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/ubuntu-22.04-humble.yml?query=branch%3Aros2_humble
+[humble-deb-badge]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/debian-package.yml/badge.svg?branch=ros2_humble
+[humble-deb]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/debian-package.yml?query=branch%3Aros2_humble
+[humble-format-badge]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/code_format.yml/badge.svg?branch=ros2_humble
+[humble-format]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/code_format.yml?query=branch%3Aros2_humble
+
+[jazzy-build-badge]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/ubuntu-24.04-jazzy.yml/badge.svg?branch=ros2_jazzy
+[jazzy-build]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/ubuntu-24.04-jazzy.yml?query=branch%3Aros2_jazzy
+[jazzy-deb-badge]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/debian-package.yml/badge.svg?branch=ros2_jazzy
+[jazzy-deb]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/debian-package.yml?query=branch%3Aros2_jazzy
+[jazzy-format-badge]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/code_format.yml/badge.svg?branch=ros2_jazzy
+[jazzy-format]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/code_format.yml?query=branch%3Aros2_jazzy
+
+[lyrical-build-badge]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/ubuntu-26.04-lyrical.yml/badge.svg?branch=ros2_lyrical
+[lyrical-build]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/ubuntu-26.04-lyrical.yml?query=branch%3Aros2_lyrical
+[lyrical-deb-badge]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/debian-package.yml/badge.svg?branch=ros2_lyrical
+[lyrical-deb]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/debian-package.yml?query=branch%3Aros2_lyrical
+[lyrical-format-badge]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/code_format.yml/badge.svg?branch=ros2_lyrical
+[lyrical-format]: https://github.com/jb-balaji/ros2_openvino_toolkit/actions/workflows/code_format.yml?query=branch%3Aros2_lyrical
+
 ## Table of Contents
 * [➤ Overview](#overview)
   * [ROS2 Version Supported](#ros2-version-supported)
