@@ -28,9 +28,9 @@
 
 |Branch|ROS 2|Ubuntu|OpenVINO|Install method|
 |---|---|---|---|---|
-|[main](https://github.com/intel/ros2_openvino_toolkit/tree/main)|Jazzy (development branch)|24.04|2025.4.0|Intel APT|
+|[main](https://github.com/intel/ros2_openvino_toolkit/tree/main)|Jazzy (development branch)|24.04|2026.4.1|Intel APT|
 |[ros2_lyrical](https://github.com/intel/ros2_openvino_toolkit/tree/ros2_lyrical)|Lyrical (pre-release)|26.04|2026.4.1|Intel APT|
-|[ros2_jazzy](https://github.com/intel/ros2_openvino_toolkit/tree/ros2_jazzy)|Jazzy|24.04|2025.4.0|Intel APT|
+|[ros2_jazzy](https://github.com/intel/ros2_openvino_toolkit/tree/ros2_jazzy)|Jazzy|24.04|2026.4.1|Intel APT|
 |[ros2_humble](https://github.com/intel/ros2_openvino_toolkit/tree/ros2_humble)|Humble|22.04|2025.4.0|Intel APT|
 
 `main` is the development branch and tracks the Jazzy line. `ros2_jazzy`, `ros2_humble` and `ros2_lyrical` are the maintenance branches of each ROS 2 distribution, and each release is tagged as `<distro>/<version>`, for example `jazzy/1.0.0`. Releases for end-of-life distributions (Dashing, Eloquent, Foxy, Galactic) are kept as `archive/*` tags.
@@ -266,7 +266,7 @@ Commands below are for the `ros2_jazzy` branch (Ubuntu 24.04). The full walkthro
 mkdir -p ~/ros2_ws/src && cd ~/ros2_ws/src
 git clone https://github.com/intel/ros2_openvino_toolkit -b ros2_jazzy
 sudo ./ros2_openvino_toolkit/script/packaging/setup_openvino_apt.sh
-sudo apt install openvino-libraries-dev-2025.4.0
+sudo apt install openvino-libraries-dev-2026.4.1
 
 # 2. Build
 cd ~/ros2_ws
@@ -367,7 +367,7 @@ The toolkit can be packaged for ROS 2 Jazzy on Ubuntu 24.04 (amd64). The package
 ```bash
 make package
 ```
-* Install the packages on a system with ROS 2 Jazzy. OpenVINO 2025.4.0 is installed as a dependency from the Intel APT repository, which the first command enables.
+* Install the packages on a system with ROS 2 Jazzy. OpenVINO 2026.4.1 is installed as a dependency from the Intel APT repository, which the first command enables.
 ```bash
 sudo ./script/packaging/setup_openvino_apt.sh
 sudo apt install ./dist/*.deb
@@ -391,7 +391,7 @@ make shell
 ros2 run openvino_node setup_models.sh --sample pipeline_image
 ros2 launch openvino_node pipeline_image.launch.py device:=CPU
 ```
-* `GPU` needs a driver in the container that supports the GPU of the host. The `intel-opencl-icd` package of Ubuntu 24.04 is installed for that purpose; see the [OpenVINO GPU configuration](https://docs.openvino.ai/2025/get-started/install-openvino/configurations/configurations-intel-gpu.html) for newer drivers.
+* `GPU` needs a driver in the container that supports the GPU of the host. The `intel-opencl-icd` package of Ubuntu 24.04 is installed for that purpose; see the [OpenVINO GPU configuration](https://docs.openvino.ai/2026/get-started/install-openvino/configurations/configurations-intel-gpu.html) for newer drivers.
 * `NPU` needs the [Intel NPU driver](https://github.com/intel/linux-npu-driver) inside the container. It is not installed by these targets.
 
 ## Reference

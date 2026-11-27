@@ -18,7 +18,7 @@ To try the toolkit without a local ROS 2 installation, use the Debian packages i
 |---|---|
 |ROS 2 Jazzy|[Install guide](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html)|
 |Build tools and ROS packages|`sudo apt install python3-colcon-common-extensions ros-jazzy-cv-bridge ros-jazzy-yaml-cpp-vendor ros-jazzy-rviz2 ros-jazzy-rqt-image-view libopencv-dev`|
-|OpenVINO 2025.4|Installed in step 2|
+|OpenVINO 2026.4|Installed in step 2|
 
 Notes:
 * RealSense cameras are read through the ROS camera node. Install `ros-jazzy-realsense2-camera` (or the one of your librealsense stack) only if you use a RealSense camera, and launch with `camera:=realsense`.
@@ -31,10 +31,10 @@ Notes:
 mkdir -p ~/ros2_ws/src && cd ~/ros2_ws/src
 git clone https://github.com/intel/ros2_openvino_toolkit -b ros2_jazzy
 sudo ./ros2_openvino_toolkit/script/packaging/setup_openvino_apt.sh
-sudo apt install openvino-libraries-dev-2025.4.0
+sudo apt install openvino-libraries-dev-2026.4.1
 ```
 
-The script enables the [Intel APT repository of OpenVINO](https://docs.openvino.ai/2025/get-started/install-openvino/install-openvino-apt.html). OpenVINO 2025.4.0 is the release this branch is built and tested with.
+The script enables the [Intel APT repository of OpenVINO](https://docs.openvino.ai/2026/get-started/install-openvino/install-openvino-apt.html). OpenVINO 2026.4.1 is the release this branch is built and tested with.
 
 ## 3. Build
 
@@ -95,7 +95,7 @@ Useful launch arguments:
 
 The device each model actually runs on is printed at startup (`Engine created: requested device=GPU, executing on=GPU.0`) and drawn on the output image next to the FPS.
 
-`GPU` and `NPU` need the Intel user-space drivers of the device, see the OpenVINO configuration guides for [GPU](https://docs.openvino.ai/2025/get-started/install-openvino/configurations/configurations-intel-gpu.html) and [NPU](https://docs.openvino.ai/2025/get-started/install-openvino/configurations/configurations-intel-npu.html).
+`GPU` and `NPU` need the Intel user-space drivers of the device, see the OpenVINO configuration guides for [GPU](https://docs.openvino.ai/2026/get-started/install-openvino/configurations/configurations-intel-gpu.html) and [NPU](https://docs.openvino.ai/2026/get-started/install-openvino/configurations/configurations-intel-npu.html).
 
 ### Other demos
 

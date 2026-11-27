@@ -5,7 +5,7 @@ This repository contains a Dockerfile for building a Docker image with ROS2 and 
 ## Features
 
 - ROS2 Jazzy Desktop
-- OpenVINO Toolkit version 2025.4.0
+- OpenVINO Toolkit version 2026.4.1
 - RealSense ROS camera node (`realsense2_camera`), used with `camera:=realsense`
 - User setup with `sudo` privileges
   
@@ -16,7 +16,7 @@ This repository contains a Dockerfile for building a Docker image with ROS2 and 
 
 ## Building the Docker Image
   
-To build the Docker image, use the following command. The image installs OpenVINO `2025.4.0`.
+To build the Docker image, use the following command. The image installs OpenVINO `2026.4.1`.
 
 ```bash
 docker build -t  ros2_openvino_image  .
@@ -83,7 +83,7 @@ docker run -itd -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v /dev:/de
 
 The image does not contain the user-space drivers of these devices. Install them inside the container:
 
-* GPU: `apt install intel-opencl-icd`, or a newer driver as described in the [OpenVINO GPU configuration](https://docs.openvino.ai/2025/get-started/install-openvino/configurations/configurations-intel-gpu.html).
+* GPU: `apt install intel-opencl-icd`, or a newer driver as described in the [OpenVINO GPU configuration](https://docs.openvino.ai/2026/get-started/install-openvino/configurations/configurations-intel-gpu.html).
 * NPU: the [Intel NPU driver](https://github.com/intel/linux-npu-driver).
 
 Then select the device at launch, for example `ros2 launch openvino_node pipeline_image.launch.py device:=GPU`. The device in use is printed at startup.

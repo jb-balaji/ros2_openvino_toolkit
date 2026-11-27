@@ -20,7 +20,7 @@ HOST_UID := $(shell id -u)
 HOST_GID := $(shell id -g)
 
 # OpenVINO release used by the colcon targets; keep in sync with */debian/control.
-OPENVINO_VERSION := 2025.4.0
+OPENVINO_VERSION := 2026.4.1
 
 DOCKER_RUN := docker run --rm -t --platform linux/amd64 \
 	-e DEBIAN_FRONTEND=noninteractive \
